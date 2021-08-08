@@ -1,7 +1,9 @@
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  webpack: (config, { defaultLoaders }) => {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.plugins.push(new Dotenv({ silent: true, }))
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       // Transform all direct `react-native` imports to `react-native-web`
