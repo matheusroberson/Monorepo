@@ -1,31 +1,39 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {Container, Input} from '../../shared/components/Home/styles';
+import Logo from '../../shared/components/Logo';
+import {Button, View} from 'react-native';
+import {getInfosSymbol} from '../../shared/api';
 
+const App = () => {
+  const [text, onChangeText] = React.useState('');
 
-declare const global: {HermesInternal: null | {}};
+  const handleLatestPrice = (props: string) => {
+    getInfosSymbol(props);
 
-const App: () => React.ReactNode = () => {
+    // redirect alternate.tsx
+  };
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic">
-          <View>
-            <View>
-              <Text>
-                React Native for Web & Next.js
-              </Text>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <Container>
+        <View style={{marginBottom: 250}}>
+          <Logo />
+          <Input
+            onChangeText={(text: string) => onChangeText(text)}
+            placeholder="Buscar Empresa"
+            value={text}
+            paddingHorizontal={20}
+            borderColor={'#E5E5E5'}
+            marginTop={15}
+            bordeRadiusRight={10}
+          />
+        </View>
+      </Container>
+      <Button
+        onPress={() => handleLatestPrice(text.toLowerCase())}
+        title="Buscar"
+        color="#0047BB"
+      />
     </>
   );
 };
