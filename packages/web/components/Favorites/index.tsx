@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import Star from "../../../shared/components/Icons/Star";
+import Trash from "../../../shared/components/Icons/Trash";
+import Grow from "../../../shared/components/Icons/Grow";
 
 const Favorites = () => {
   return (
     <View style={styles.section}>
-      <View>
-        {/* Star */}
+      <View style={styles.containerTitle}>
+        <Star width={23} height={23} fill={"#0047BB"} />
         <Text style={styles.title}>Empresas favoritas</Text>
       </View>
       <View style={styles.containerCard}>
@@ -22,8 +25,8 @@ const Favorites = () => {
               value.latestPrice) *
             100;
           return (
-            <View key={key}>
-              <View style={styles.card}>
+            <View style={styles.containerBlockCard} key={key}>
+              <TouchableOpacity style={styles.card}>
                 <View style={styles.containerInfo}>
                   <Image
                     style={styles.image}
@@ -35,19 +38,33 @@ const Favorites = () => {
                     <Text style={styles.companyName}>{value.companyName}</Text>
                   </View>
                 </View>
-                <View style={styles.containerChange}>
+                <View>
                   {perChange > 0 ? (
                     <Text style={[styles.changePositive, styles.change]}>
-                      {perChange.toFixed(2)}%{/* Increase */}
+                      {perChange.toFixed(2)}%
+                      <Grow
+                        width={18}
+                        height={18}
+                        stroke={"#79C300"}
+                        transform={"translate(0 4)"}
+                      />
                     </Text>
                   ) : (
                     <Text style={[styles.changeNegative, styles.change]}>
-                      {perChange.toFixed(2)}%{/* Decrease */}
+                      {perChange.toFixed(2)}%
+                      <Grow
+                        transform={"rotate(180) scale(-1, 1) translate(0 -4)"}
+                        width={18}
+                        height={18}
+                        stroke={"#D64B45"}
+                      />
                     </Text>
                   )}
                 </View>
-              </View>
-              {/* Trash */}
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Trash width={23} height={23} />
+              </TouchableOpacity>
             </View>
           );
         })}
@@ -62,12 +79,23 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 34,
   },
+  containerTitle: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   title: {
     fontFamily: "Graphik",
     color: "#14171A",
     fontWeight: "600",
     fontSize: 18,
     lineHeight: 27,
+    marginLeft: 12,
+  },
+  containerBlockCard: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
   },
   containerCard: {
     marginTop: 32,
@@ -84,6 +112,7 @@ const styles = StyleSheet.create({
     boxShadow: "0px 8px 20px -2px rgba(43, 37, 63, 0.1)",
     borderRadius: 8,
     width: 332,
+    marginRight: 14,
   },
   containerInfo: {
     flex: 1,
@@ -112,13 +141,13 @@ const styles = StyleSheet.create({
     letterSpacing: -0.0075,
     color: "#14171A",
   },
-  containerChange: {},
   change: {
     fontFamily: "Montserrat",
     fontStyle: "normal",
     fontWeight: "800",
     fontSize: 13,
     lineHeight: 16,
+    marginBottom: 9,
   },
   changePositive: {
     color: "#79C300",
