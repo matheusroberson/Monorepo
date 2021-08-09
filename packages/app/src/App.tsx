@@ -17,7 +17,7 @@ const App = () => {
     <>
       <Container>
         <View style={{marginBottom: 250}}>
-          <Logo />
+          <Logo width={146} height={146} />
           <Input
             onChangeText={(text: string) => onChangeText(text)}
             placeholder="Buscar Empresa"

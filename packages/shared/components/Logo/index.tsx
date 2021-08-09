@@ -3,7 +3,13 @@ import Svg, { SvgProps, Path } from "react-native-svg";
 
 function Logo(props: SvgProps) {
   return (
-    <Svg width={146} height={146} fill="none" viewBox="0 0 46 46" {...props}>
+    <Svg
+      width={props.width}
+      height={props.height}
+      fill="none"
+      viewBox="0 0 46 46"
+      {...props}
+    >
       <Path
         fill="#0047BB"
         d="M23 46c12.703 0 23-10.297 23-23S35.703 0 23 0 0 10.297 0 23s10.297 23 23 23z"
@@ -14,6 +20,6 @@ function Logo(props: SvgProps) {
       />
     </Svg>
   );
-}
+} // 146
 
 export default Logo;
