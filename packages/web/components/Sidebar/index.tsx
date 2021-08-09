@@ -20,7 +20,7 @@ const App = (props: Props) => {
         <View style={styles.menuContainer}>
           <Text style={styles.item}></Text>
           <Text onPress={() => onItemSelected("About")}>
-            <Main width={32} height={32} />
+            <Main width={32} height={32} fill={"#0047BB"} stroke={"#0047BB"} />
           </Text>
         </View>
       </ScrollView>

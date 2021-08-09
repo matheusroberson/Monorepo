@@ -9,13 +9,22 @@ function Main(props: SvgProps) {
       fill="none"
       viewBox="0 0 32 32"
     >
-      <Rect width={12.5} height={12.5} x={1} y={1} fill="#0047BB" rx={2} />
+      <Rect
+        width={12.5}
+        height={12.5}
+        x={1}
+        y={1}
+        fill={props.fill}
+        stroke={props.stroke}
+        rx={2}
+      />
       <Rect
         width={12.5}
         height={12.5}
         x={1}
         y={18.5}
-        fill="#0047BB"
+        fill={props.fill}
+        stroke={props.stroke}
         opacity={0.6}
         rx={2}
       />
@@ -24,7 +33,8 @@ function Main(props: SvgProps) {
         height={12.5}
         x={18.5}
         y={1}
-        fill="#0047BB"
+        fill={props.fill}
+        stroke={props.stroke}
         opacity={0.6}
         rx={2}
       />
@@ -33,7 +43,8 @@ function Main(props: SvgProps) {
         height={12.5}
         x={18.5}
         y={18.5}
-        fill="#0047BB"
+        fill={props.fill}
+        stroke={props.stroke}
         opacity={0.6}
         rx={2}
       />
