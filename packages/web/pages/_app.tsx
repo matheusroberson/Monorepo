@@ -1,5 +1,6 @@
-import * as React from 'react'
-import Head from 'next/head'
+import * as React from "react";
+import Head from "next/head";
+import "../styles/style.css";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
