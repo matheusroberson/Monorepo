@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Container, Input, Button } from "../../shared/components/Home/styles";
 import Sidebar from "../components/Sidebar";
 import Profile from "../components/Profile";
 import Favorites from "../components/Favorites";
+import Main from "../components/Main";
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
       <Sidebar styles={styles.sidebar} />
       <View style={styles.mainSection}>
         <View style={styles.dashSection}>
-          <Text>Block A</Text>
+          <Main />
         </View>
         <View style={styles.profileSection}>
           <Profile />
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     borderTopLeftRadius: 24,
-    backgroundColor: "#C4C4C4",
+    backgroundColor: "#f5f8fa",
   },
   sidebar: {
     width: 120,
@@ -45,9 +46,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   dashSection: {
-    backgroundColor: "#C4C4C4",
+    backgroundColor: "#f5f8fa",
     borderTopLeftRadius: 24,
     width: "66%",
+    paddingHorizontal: 22.5,
+    paddingVertical: 32,
   },
   profileSection: {
     flex: 1,
