@@ -1,9 +1,11 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Input, Button } from "../../../shared/components/Home/styles";
 import Search from "../../../shared/components/Icons/Search";
 import MainDash from "../../../shared/components/Icons/Main";
 import Chart from "../Chart";
+import Footer from "../Footer";
+
 const Main = () => {
   const [text, onChangeText] = React.useState("");
 
@@ -28,6 +30,7 @@ const Main = () => {
         </Button>
       </View>
       <Chart />
+      <Footer />
     </View>
   );
 };
