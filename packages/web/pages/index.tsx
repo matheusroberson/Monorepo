@@ -5,7 +5,7 @@ import {
   Button,
   Text,
 } from "../../shared/components/Home/styles";
-import Logo from "../../shared/components/Logo";
+import Logo from "../../shared/components/Icons/Logo";
 import { View, StyleSheet } from "react-native";
 import { getInfosSymbol } from "../../shared/api";
 import { useRouter } from "next/router";

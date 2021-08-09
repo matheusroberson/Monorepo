@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Input} from '../../shared/components/Home/styles';
-import Logo from '../../shared/components/Logo';
+import Logo from '../../shared/components/Icons/Logo';
 import {Button, View} from 'react-native';
 import {getInfosSymbol} from '../../shared/api';
 

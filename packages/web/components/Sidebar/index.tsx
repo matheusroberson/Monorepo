@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
-import Logo from "../../../shared/components/Logo";
-import Main from "../../../shared/components/Main";
+import Logo from "../../../shared/components/Icons/Logo";
+import Main from "../../../shared/components/Icons/Main";
 interface Props {
   styles: {};
 }
