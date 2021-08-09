@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { Container, Input, Button } from "../../shared/components/Home/styles";
 import Sidebar from "../components/Sidebar";
 import Profile from "../components/Profile";
+import Favorites from "../components/Favorites";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         </View>
         <View style={styles.profileSection}>
           <Profile />
+          <Favorites />
         </View>
       </View>
     </View>
