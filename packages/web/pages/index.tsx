@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import {
   Container,
   Input,
@@ -8,20 +8,22 @@ import {
 import Logo from "../../shared/components/Logo";
 import { View, StyleSheet } from "react-native";
 import { getInfosSymbol } from "../../shared/api";
+import { useRouter } from "next/router";
 
 const App = () => {
   const [text, onChangeText] = React.useState("");
+  const router = useRouter();
 
   const handleLatestPrice = (props: string) => {
     getInfosSymbol(props);
 
-    // redirect alternate.tsx
+    router.push("/dashboard");
   };
 
   return (
     <Container>
       <Container style={{ marginBottom: 240 }}>
-        <Logo />
+        <Logo width={146} height={146} />
         <View style={styles.container}>
           <Input
             onChangeText={(text: string) => onChangeText(text)}
