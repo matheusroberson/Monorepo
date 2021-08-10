@@ -19,7 +19,7 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
   section: {
-    alignItems: "center",
+    alignItems: "flex-start",
     width: "100%",
   },
   profile: {
