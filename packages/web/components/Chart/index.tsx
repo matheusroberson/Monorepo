@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ActiveDot from "../../../shared/components/Icons/ActiveDot";
 import Star from "../../../shared/components/Icons/Star";
 import Grow from "../../../shared/components/Icons/Grow";
@@ -9,8 +9,9 @@ import {
   CartesianGrid,
   YAxis,
   Area,
-  Tooltip,
+  Tooltip as Tool,
 } from "recharts";
+import ReactTooltip from "react-tooltip";
 
 const data = [
   { hour: "10:00", pv: 0 },
@@ -59,13 +60,17 @@ const Chart = () => {
       <View style={styles.containerChart}>
         <View style={styles.headerChart}>
           <View style={styles.containerHeader}>
-            <Star
-              width={23}
-              height={23}
-              fill={"#FFF"}
-              stroke={"#0047BB"}
-              strokeWidth={1.5}
-            />
+            <TouchableOpacity>
+              <ReactTooltip backgroundColor="#0047BB" borderColor="#0047BB" />
+              <Star
+                width={23}
+                height={23}
+                fill={"#FFF"}
+                stroke={"#0047BB"}
+                strokeWidth={1.5}
+                data-tip="Adicionar aos Favoritos"
+              />
+            </TouchableOpacity>
             <View style={{ marginLeft: 12 }}>
               <Text style={styles.symbol}>MSFT</Text>
               <Text style={styles.companyName}>Microsoft</Text>
@@ -133,7 +138,7 @@ const Chart = () => {
               }}
             />
             <CartesianGrid stroke="#F5F8FA" />
-            <Tooltip content={<CustomToolTip />} />
+            <Tool content={<CustomToolTip />} />
             <Area
               type="monotone"
               dataKey="pv"
