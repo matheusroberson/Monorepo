@@ -9,6 +9,7 @@ export const Container = styled.View`
 
 export const Input = styled.TextInput`
   height: 40px;
+  width: ${props => `${props.width}%`};;
   margin-top: ${props => `${props.marginTop}px`};
   border-width: 1px;
   border-color: ${props => `${props.borderColor}`};
@@ -16,6 +17,7 @@ export const Input = styled.TextInput`
   border-top-right-radius: ${props => `${props.bordeRadiusRight}px`};
   border-bottom-right-radius: ${props => `${props.bordeRadiusRight}px`};
   padding: 10px ${props => `${props.paddingHorizontal}px`};
+  background-color: ${props => `${props.backgroundColor}`};
 `;
 
 export const Text = styled.Text`

@@ -32,12 +32,14 @@ const Main = () => {
           placeholder="Buscar empresa"
           value={text}
           paddingHorizontal={15}
-          borderColor={"#b1b1b1"}
+          borderColor={"#E1E0E7"}
           marginTop={0}
+          backgroundColor={"#FFFFFF"}
           bordeRadiusRight={0}
+          width={30}
         />
         <Button
-          borderRadiusLeft={10}
+          borderRadiusLeft={0}
           onPress={() => console.log(text.toLowerCase())}
         >
           <Search width={23} height={23} />

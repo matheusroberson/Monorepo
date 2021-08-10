@@ -23,12 +23,13 @@ const App = () => {
         <View style={styles.container}>
           <Input
             onChangeText={(text: string) => onChangeText(text)}
-            placeholder="Buscar Empresa"
+            placeholder="Buscar empresa"
             value={text}
             paddingHorizontal={15}
             borderColor={"#b1b1b1"}
             marginTop={0}
             bordeRadiusRight={0}
+            width={100}
           />
           <Button
             borderRadiusLeft={0}
