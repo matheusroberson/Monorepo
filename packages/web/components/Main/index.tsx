@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Input, Button } from "../../../shared/components/Home/styles";
 import Search from "../../../shared/components/Icons/Search";
 import MainDash from "../../../shared/components/Icons/Main";
+import Link from "../../../shared/components/Link";
 import Chart from "../Chart";
 import Footer from "../Footer";
 
@@ -11,9 +12,19 @@ const Main = () => {
 
   return (
     <View style={styles.containerMain}>
-      <View style={styles.containerHeaderTitle}>
-        <MainDash width={20} height={20} stroke={"#0047BB"} strokeWidth={1.5} />
-        <Text style={styles.headerTitle}>Dashborad</Text>
+      <View style={styles.containerHeader}>
+        <View style={styles.containerHeaderTitle}>
+          <MainDash
+            width={20}
+            height={20}
+            stroke={"#0047BB"}
+            strokeWidth={1.5}
+          />
+          <Text style={styles.headerTitle}>Dashborad</Text>
+        </View>
+        <View>
+          <Link />
+        </View>
       </View>
       <View style={styles.containerInputs}>
         <Input
@@ -42,11 +53,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  containerHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
   containerHeaderTitle: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    width: "100%",
   },
   headerTitle: {
     fontFamily: "Graphik",
