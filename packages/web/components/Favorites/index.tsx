@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import Star from "../../../shared/components/Icons/Star";
 import Trash from "../../../shared/components/Icons/Trash";
 import Grow from "../../../shared/components/Icons/Grow";
@@ -11,64 +19,68 @@ const Favorites = () => {
         <Star width={23} height={23} fill={"#0047BB"} />
         <Text style={styles.title}>Empresas favoritas</Text>
       </View>
-      <View style={styles.containerCard}>
-        {[
-          {
-            latestPrice: 3333.98,
-            change: -10.96,
-            companyName: "Amazon",
-            symbol: "AMZN",
-          },
-        ].map((value, key) => {
-          const perChange =
-            ((value.latestPrice - (value.latestPrice - value.change)) /
-              value.latestPrice) *
-            100;
-          return (
-            <View style={styles.containerBlockCard} key={key}>
-              <TouchableOpacity style={styles.card}>
-                <View style={styles.containerInfo}>
-                  <Image
-                    style={styles.image}
-                    source={{ uri: "https://i.imgur.com/9w1I68p.png" }}
-                    resizeMode={"cover"}
-                  />
-                  <View style={styles.cardCompany}>
-                    <Text style={styles.symbol}>{value.symbol}</Text>
-                    <Text style={styles.companyName}>{value.companyName}</Text>
+      <SafeAreaView>
+        <ScrollView style={styles.containerCard}>
+          {[
+            {
+              latestPrice: 3333.98,
+              change: -10.96,
+              companyName: "Amazon",
+              symbol: "AMZN",
+            },
+          ].map((value, key) => {
+            const perChange =
+              ((value.latestPrice - (value.latestPrice - value.change)) /
+                value.latestPrice) *
+              100;
+            return (
+              <View style={styles.containerBlockCard} key={key}>
+                <TouchableOpacity style={styles.card}>
+                  <View style={styles.containerInfo}>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: "https://i.imgur.com/9w1I68p.png" }}
+                      resizeMode={"cover"}
+                    />
+                    <View style={styles.cardCompany}>
+                      <Text style={styles.symbol}>{value.symbol}</Text>
+                      <Text style={styles.companyName}>
+                        {value.companyName}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-                <View>
-                  {perChange > 0 ? (
-                    <Text style={[styles.changePositive, styles.change]}>
-                      {perChange.toFixed(2)}%
-                      <Grow
-                        width={18}
-                        height={18}
-                        stroke={"#79C300"}
-                        transform={"translate(0 4)"}
-                      />
-                    </Text>
-                  ) : (
-                    <Text style={[styles.changeNegative, styles.change]}>
-                      {perChange.toFixed(2)}%
-                      <Grow
-                        transform={"rotate(180) scale(-1, 1) translate(0 -4)"}
-                        width={18}
-                        height={18}
-                        stroke={"#D64B45"}
-                      />
-                    </Text>
-                  )}
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Trash width={23} height={23} />
-              </TouchableOpacity>
-            </View>
-          );
-        })}
-      </View>
+                  <View>
+                    {perChange > 0 ? (
+                      <Text style={[styles.changePositive, styles.change]}>
+                        {perChange.toFixed(2)}%
+                        <Grow
+                          width={18}
+                          height={18}
+                          stroke={"#79C300"}
+                          transform={"translate(0 4)"}
+                        />
+                      </Text>
+                    ) : (
+                      <Text style={[styles.changeNegative, styles.change]}>
+                        {perChange.toFixed(2)}%
+                        <Grow
+                          transform={"rotate(180) scale(-1, 1) translate(0 -4)"}
+                          width={18}
+                          height={18}
+                          stroke={"#D64B45"}
+                        />
+                      </Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Trash width={23} height={23} />
+                </TouchableOpacity>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
@@ -96,9 +108,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 32,
   },
   containerCard: {
+    flexDirection: "column",
     marginTop: 32,
+    height: "80vh",
   },
   card: {
     flex: 1,
