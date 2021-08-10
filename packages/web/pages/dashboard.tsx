@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Container, Input, Button } from "../../shared/components/Home/styles";
+import { Container, Input, Button } from "../../shared/styles/styles";
 import Sidebar from "../components/Sidebar";
 import Profile from "../components/Profile";
 import Favorites from "../components/Favorites";

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Input} from '../../shared/components/Home/styles';
+import {Container, Input} from '../../shared/styles/styles';
 import Logo from '../../shared/components/Icons/Logo';
 import {Button, View} from 'react-native';
 import {getInfosSymbol} from '../../shared/api';

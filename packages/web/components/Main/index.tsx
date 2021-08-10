@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Input, Button } from "../../../shared/components/Home/styles";
+import { Input, Button } from "../../../shared/styles/styles";
 import Search from "../../../shared/components/Icons/Search";
 import MainDash from "../../../shared/components/Icons/Main";
 import Link from "../../../shared/components/Link";
