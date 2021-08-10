@@ -1,24 +1,19 @@
 import React from "react";
-import { Container, Input, Button, Text } from "../../shared/styles/styles";
+import { Container, Input, Button } from "../../shared/styles/styles";
 import Logo from "../../shared/components/Icons/Logo";
 import Search from "../../shared/components/Icons/Search";
 import { View, StyleSheet } from "react-native";
-import { getInfosSymbol } from "../../shared/api";
 import { useRouter } from "next/router";
+import Sidebar from "../components/Sidebar";
 
 const App = () => {
   const [text, onChangeText] = React.useState("");
   const router = useRouter();
 
-  const handleLatestPrice = (props: string) => {
-    getInfosSymbol(props);
-
-    router.push("/dashboard");
-  };
-
   return (
-    <Container>
-      <Container style={{ marginBottom: 240 }}>
+    <View style={styles.containerHome}>
+      <Sidebar styles={styles.sidebar} />
+      <Container>
         <Logo width={146} height={146} />
         <View style={styles.container}>
           <Input
@@ -33,20 +28,31 @@ const App = () => {
           />
           <Button
             borderRadiusLeft={0}
-            onPress={() => handleLatestPrice(text.toLowerCase())}
+            onPress={() =>
+              router.push(`/dashboard?symbol=${text.toLowerCase()}`)
+            }
           >
             <Search width={23} height={23} />
           </Button>
         </View>
       </Container>
-    </Container>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  containerHome: {
+    flex: 1,
+    flexDirection: "row",
+  },
   container: {
     flexDirection: "row",
     marginTop: "15px",
+  },
+  sidebar: {
+    width: 120,
+    height: "100%",
+    backgroundColor: "#FFFFFF",
   },
 });
 
