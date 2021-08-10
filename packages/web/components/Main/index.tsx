@@ -36,8 +36,11 @@ const Main = () => {
           marginTop={0}
           bordeRadiusRight={0}
         />
-        <Button onPress={() => console.log(text.toLowerCase())}>
-          <Search width={14} height={14} />
+        <Button
+          borderRadiusLeft={10}
+          onPress={() => console.log(text.toLowerCase())}
+        >
+          <Search width={23} height={23} />
         </Button>
       </View>
       <Chart />

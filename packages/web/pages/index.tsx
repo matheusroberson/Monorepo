@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Input, Button, Text } from "../../shared/styles/styles";
 import Logo from "../../shared/components/Icons/Logo";
+import Search from "../../shared/components/Icons/Search";
 import { View, StyleSheet } from "react-native";
 import { getInfosSymbol } from "../../shared/api";
 import { useRouter } from "next/router";
@@ -29,8 +30,11 @@ const App = () => {
             marginTop={0}
             bordeRadiusRight={0}
           />
-          <Button onPress={() => handleLatestPrice(text.toLowerCase())}>
-            <Text>º_º</Text>
+          <Button
+            borderRadiusLeft={0}
+            onPress={() => handleLatestPrice(text.toLowerCase())}
+          >
+            <Search width={23} height={23} />
           </Button>
         </View>
       </Container>

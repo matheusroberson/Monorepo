@@ -23,8 +23,10 @@ export const Text = styled.Text`
 `;
 
 export const Button = styled.TouchableOpacity`
-  padding: 7px 6px 0px 4px;
+  padding: 7px 8px 0px 8px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  border-top-left-radius: ${props => `${props.borderRadiusLeft}`};
+  border-bottom-left-radius: ${props => `${props.borderRadiusLeft}`};
   background-color: #0047BB;
 `;
