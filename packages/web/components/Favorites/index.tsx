@@ -11,6 +11,7 @@ import {
 import Star from "../../../shared/components/Icons/Star";
 import Trash from "../../../shared/components/Icons/Trash";
 import Grow from "../../../shared/components/Icons/Grow";
+import { symbolToLogo } from "../../../shared/lib/data";
 
 const Favorites = () => {
   return (
@@ -33,13 +34,14 @@ const Favorites = () => {
               ((value.latestPrice - (value.latestPrice - value.change)) /
                 value.latestPrice) *
               100;
+            const uri = symbolToLogo(value.symbol.toLowerCase());
             return (
               <View style={styles.containerBlockCard} key={key}>
                 <TouchableOpacity style={styles.card}>
                   <View style={styles.containerInfo}>
                     <Image
                       style={styles.image}
-                      source={{ uri: "https://i.imgur.com/9w1I68p.png" }}
+                      source={{ uri }}
                       resizeMode={"cover"}
                     />
                     <View style={styles.cardCompany}>

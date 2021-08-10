@@ -11,6 +11,7 @@ import {
 import Star from "../../../shared/components/Icons/Star";
 import Grow from "../../../shared/components/Icons/Grow";
 import History from "../../../shared/components/Icons/History";
+import { symbolToLogo } from "../../../shared/lib/data";
 
 const Footer = () => {
   const ref = React.useRef(null);
@@ -57,6 +58,7 @@ const Footer = () => {
                 ((value.latestPrice - (value.latestPrice - value.change)) /
                   value.latestPrice) *
                 100;
+              const uri = symbolToLogo(value.symbol.toLowerCase());
               return (
                 <View style={styles.containerBlockCard} key={key}>
                   <View style={styles.card}>
@@ -71,7 +73,7 @@ const Footer = () => {
                     <TouchableOpacity style={styles.containerInfo}>
                       <Image
                         style={styles.image}
-                        source={{ uri: "https://i.imgur.com/9w1I68p.png" }}
+                        source={{ uri }}
                         resizeMode={"cover"}
                       />
                       <View style={styles.cardCompany}>
