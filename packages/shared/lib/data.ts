@@ -4,7 +4,7 @@ export function symbolToLogo(syb:string) {
             "symbol": "amzn",
             "url": "https://i.imgur.com/Ae1rKJQ.png"
         },{
-            "symbol": "appl",
+            "symbol": "aapl",
             "url": "https://i.imgur.com/Dr2cbCP.png"
         }, {
             "symbol": "fb",
@@ -16,7 +16,7 @@ export function symbolToLogo(syb:string) {
             "symbol": "sbux",
             "url": "https://i.imgur.com/O5Bcz6x.png"
         },{
-            "symbol": "abde",
+            "symbol": "adbe",
             "url": "https://i.imgur.com/VjMV7x8.png"
         }, {
             "symbol": "twtr",
