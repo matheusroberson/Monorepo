@@ -29,7 +29,10 @@ const App = () => {
           <Button
             borderRadiusLeft={0}
             onPress={() =>
-              router.push(`/dashboard?symbol=${text.toLowerCase()}`)
+              router.push({
+                pathname: "/dashboard",
+                query: { symbol: text.toLowerCase() },
+              })
             }
           >
             <Search width={23} height={23} />

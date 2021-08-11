@@ -27,7 +27,22 @@ const data = [
   { hour: "18:00", pv: 300 },
 ];
 
-const Chart = () => {
+interface chartProps {
+  infos: {
+    symbol: string;
+    companyName: string;
+    change: number;
+    latestPrice: number;
+  };
+}
+
+const Chart = (props: chartProps) => {
+  const perChange =
+    ((props.infos.latestPrice -
+      (props.infos.latestPrice - props.infos.change)) /
+      props.infos.latestPrice) *
+    100;
+
   const CustomActiveDot = ({ cx, cy }: { cx: number; cy: number }) => {
     return (
       <ActiveDot
@@ -56,7 +71,6 @@ const Chart = () => {
 
   return (
     <>
-      {" "}
       <View style={styles.containerChart}>
         <View style={styles.headerChart}>
           <View style={styles.containerHeader}>
@@ -72,13 +86,13 @@ const Chart = () => {
               />
             </TouchableOpacity>
             <View style={{ marginLeft: 12 }}>
-              <Text style={styles.symbol}>MSFT</Text>
-              <Text style={styles.companyName}>Microsoft</Text>
+              <Text style={styles.symbol}>{props.infos.symbol}</Text>
+              <Text style={styles.companyName}>{props.infos.companyName}</Text>
             </View>
           </View>
           <View style={styles.containerChange}>
             <View style={styles.containerGrow}>
-              {-1 > 0 ? (
+              {perChange > 0 ? (
                 <Grow
                   width={20}
                   height={20}
@@ -93,15 +107,15 @@ const Chart = () => {
                   stroke={"#D64B45"}
                 />
               )}
-              <Text style={styles.latestPrice}>$265,98</Text>
+              <Text style={styles.latestPrice}>${props.infos.latestPrice}</Text>
             </View>
-            {-1 > 0 ? (
+            {perChange > 0 ? (
               <Text style={[styles.change, styles.changePositive]}>
-                $-0.009 (-0.03%)
+                ${props.infos.change} (${perChange.toFixed(2)}%)
               </Text>
             ) : (
               <Text style={[styles.change, styles.changeNegative]}>
-                $-0.009 (-0.03%)
+                ${props.infos.change} (${perChange.toFixed(2)}%)
               </Text>
             )}
           </View>

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useRouter } from "next/router";
 import { Input, Button } from "../../../shared/styles/styles";
 import Search from "../../../shared/components/Icons/Search";
 import MainDash from "../../../shared/components/Icons/Main";
@@ -7,8 +8,22 @@ import Link from "../../../shared/components/Link";
 import Chart from "../Chart";
 import Footer from "../Footer";
 
-const Main = () => {
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { infosSymbol, selectInfos } from "../../store/infos/infosSlice";
+
+interface mainProps {
+  symbol: string;
+}
+
+const Main = (props: mainProps) => {
+  const dispatch = useAppDispatch();
+  const infos = useAppSelector(selectInfos);
+  const router = useRouter();
   const [text, onChangeText] = React.useState("");
+
+  React.useEffect(() => {
+    dispatch(infosSymbol(props.symbol));
+  }, []);
 
   return (
     <View style={styles.containerMain}>
@@ -40,12 +55,17 @@ const Main = () => {
         />
         <Button
           borderRadiusLeft={0}
-          onPress={() => console.log(text.toLowerCase())}
+          onPress={() =>
+            router.push({
+              pathname: "/dashboard",
+              query: { symbol: text.toLowerCase() },
+            })
+          }
         >
           <Search width={23} height={23} />
         </Button>
       </View>
-      <Chart />
+      <Chart infos={infos} />
       <Footer />
     </View>
   );

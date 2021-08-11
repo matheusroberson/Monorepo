@@ -1,18 +1,27 @@
-import React from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
-import { Container, Input, Button } from "../../shared/styles/styles";
+import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import Profile from "../components/Profile";
 import Favorites from "../components/Favorites";
 import Main from "../components/Main";
 
 const App = () => {
+  const router = useRouter();
+  const [symbol, setSymbol] = React.useState<string>(
+    router.query.symbol as string
+  );
+
+  React.useEffect(() => {
+    if (!router.isReady) return;
+  }, [router.isReady]);
+
   return (
     <View style={styles.container}>
       <Sidebar styles={styles.sidebar} />
       <View style={styles.mainSection}>
         <View style={styles.dashSection}>
-          <Main />
+          <Main symbol={symbol} />
         </View>
         <View style={styles.profileSection}>
           <Profile />
