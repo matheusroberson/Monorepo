@@ -16,15 +16,22 @@ export type infosState = {
         companyName: string,
         change: number,
         latestPrice: number,
-    }[]
+    }[],
+    favorites: {
+        symbol: string,
+        companyName: string,
+        change: number,
+        latestPrice: number,
+    }[],
 }
 
-const initialState: infosState ={
+const initialState: infosState = {
     symbol: "",
     companyName: "",
     change: 0,
     latestPrice: 0,
     history: [],
+    favorites: []
 }
 export const infosSymbol = createAsyncThunk("infos/infosSymbol", getInfosSymbol)
 
@@ -33,7 +40,15 @@ export const infosSlice = createSlice({
     initialState,
 
     reducers: {
-
+        addFavorites: ((state, action: PayloadAction<string>) => {
+            const [item] = state.history.filter((value) => value.symbol === action.payload)
+            if(!state.favorites.find((value) => value.symbol === action.payload))
+                state.favorites.push(item)
+        }),
+        removeFavorites: ((state, action: PayloadAction<string>) => {
+            const newFavorites = state.favorites.filter((value) => value.symbol !== action.payload)
+            state.favorites = newFavorites
+        }),
     },
 
     extraReducers: (builder) => {
@@ -51,7 +66,8 @@ export const infosSlice = createSlice({
 })
 
 export const {
-    
+    addFavorites,
+    removeFavorites
 } = infosSlice.actions
 
 

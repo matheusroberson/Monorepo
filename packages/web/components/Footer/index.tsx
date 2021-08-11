@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   View,
   TouchableOpacity,
@@ -13,6 +13,12 @@ import Grow from "../../../shared/components/Icons/Grow";
 import History from "../../../shared/components/Icons/History";
 import { symbolToLogo } from "../../../shared/lib/data";
 
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  addFavorites,
+  removeFavorites,
+  selectInfos,
+} from "../../store/infos/infosSlice";
 interface footerProps {
   history: {
     symbol: string;
@@ -24,7 +30,8 @@ interface footerProps {
 
 const Footer = (props: footerProps) => {
   const ref = React.useRef(null);
-
+  const dispatch = useAppDispatch();
+  const { favorites } = useAppSelector(selectInfos);
   return (
     <View style={styles.containerFooter}>
       <View style={styles.containerFooterHeader}>
@@ -61,17 +68,36 @@ const Footer = (props: footerProps) => {
                   value.latestPrice) *
                 100;
               const uri = symbolToLogo(value.symbol.toLowerCase());
+
               return (
                 <View style={styles.containerBlockCard} key={key}>
                   <View style={styles.card}>
-                    <TouchableOpacity>
-                      <Star
-                        width={23}
-                        height={23}
-                        stroke={"#0047BB"}
-                        strokeWidth={1.5}
-                      />
-                    </TouchableOpacity>
+                    {(
+                      favorites.length !== 0 ? !favorites.includes(value) : true
+                    ) ? (
+                      <TouchableOpacity
+                        onPress={() => dispatch(addFavorites(value.symbol))}
+                      >
+                        <Star
+                          width={23}
+                          height={23}
+                          stroke={"#0047BB"}
+                          strokeWidth={1.5}
+                        />
+                      </TouchableOpacity>
+                    ) : (
+                      <TouchableOpacity
+                        onPress={() => dispatch(removeFavorites(value.symbol))}
+                      >
+                        <Star
+                          width={23}
+                          height={23}
+                          fill={"#0047BB"}
+                          stroke={"#0047BB"}
+                          strokeWidth={1.5}
+                        />
+                      </TouchableOpacity>
+                    )}
                     <TouchableOpacity style={styles.containerInfo}>
                       <Image
                         style={styles.image}

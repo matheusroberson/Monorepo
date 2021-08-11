@@ -13,7 +13,13 @@ import Trash from "../../../shared/components/Icons/Trash";
 import Grow from "../../../shared/components/Icons/Grow";
 import { symbolToLogo } from "../../../shared/lib/data";
 
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { selectInfos, removeFavorites } from "../../store/infos/infosSlice";
+
 const Favorites = () => {
+  const dispatch = useAppDispatch();
+  const { favorites } = useAppSelector(selectInfos);
+
   return (
     <View style={styles.section}>
       <View style={styles.containerTitle}>
@@ -22,14 +28,7 @@ const Favorites = () => {
       </View>
       <SafeAreaView>
         <ScrollView style={styles.containerCard}>
-          {[
-            {
-              latestPrice: 3333.98,
-              change: -10.96,
-              companyName: "Amazon",
-              symbol: "AMZN",
-            },
-          ].map((value, key) => {
+          {favorites.map((value, key) => {
             const perChange =
               ((value.latestPrice - (value.latestPrice - value.change)) /
                 value.latestPrice) *
@@ -75,7 +74,9 @@ const Favorites = () => {
                     )}
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => dispatch(removeFavorites(value.symbol))}
+                >
                   <Trash width={23} height={23} />
                 </TouchableOpacity>
               </View>
