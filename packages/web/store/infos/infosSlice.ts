@@ -1,6 +1,7 @@
 import {
     createSlice,
-    createAsyncThunk
+    createAsyncThunk,
+    PayloadAction
 } from '@reduxjs/toolkit'
 import type {RootState} from '../index'
 import {getInfosSymbol} from '../../../shared/api/index' 
@@ -10,7 +11,12 @@ export type infosState = {
     companyName: string,
     change: number,
     latestPrice: number,
-    history: object[]
+    history: {
+        symbol: string,
+        companyName: string,
+        change: number,
+        latestPrice: number,
+    }[]
 }
 
 const initialState: infosState ={
@@ -18,7 +24,7 @@ const initialState: infosState ={
     companyName: "",
     change: 0,
     latestPrice: 0,
-    history: []
+    history: [],
 }
 export const infosSymbol = createAsyncThunk("infos/infosSymbol", getInfosSymbol)
 
@@ -27,7 +33,7 @@ export const infosSlice = createSlice({
     initialState,
 
     reducers: {
-        
+
     },
 
     extraReducers: (builder) => {
@@ -37,11 +43,9 @@ export const infosSlice = createSlice({
             state.companyName = payload.companyName
             state.latestPrice = payload.latestPrice
 
-            state.history.push(payload)
-
-        })
-        builder.addCase(infosSymbol.pending, (state, {meta, payload}) => {
-            console.log(meta.arg)
+            const lastHistoy = state.history.filter((value) => value.symbol !== payload.symbol)
+            lastHistoy.push(payload)
+            state.history = lastHistoy
         })
     }
 })

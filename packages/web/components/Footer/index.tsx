@@ -13,7 +13,16 @@ import Grow from "../../../shared/components/Icons/Grow";
 import History from "../../../shared/components/Icons/History";
 import { symbolToLogo } from "../../../shared/lib/data";
 
-const Footer = () => {
+interface footerProps {
+  history: {
+    symbol: string;
+    companyName: string;
+    change: number;
+    latestPrice: number;
+  }[];
+}
+
+const Footer = (props: footerProps) => {
   const ref = React.useRef(null);
 
   return (
@@ -46,14 +55,7 @@ const Footer = () => {
             ref={ref}
             style={styles.slide}
           >
-            {[
-              {
-                latestPrice: 3333.98,
-                change: -10.96,
-                companyName: "Amazon",
-                symbol: "AMZN",
-              },
-            ].map((value, key) => {
+            {props.history.map((value, key) => {
               const perChange =
                 ((value.latestPrice - (value.latestPrice - value.change)) /
                   value.latestPrice) *

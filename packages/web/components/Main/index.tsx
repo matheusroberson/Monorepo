@@ -66,7 +66,7 @@ const Main = (props: mainProps) => {
         </Button>
       </View>
       <Chart infos={infos} />
-      <Footer />
+      <Footer history={infos.history} />
     </View>
   );
 };
