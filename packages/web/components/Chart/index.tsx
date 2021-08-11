@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ActiveDot from "../../../shared/components/Icons/ActiveDot";
 import Star from "../../../shared/components/Icons/Star";
@@ -46,8 +46,8 @@ interface chartProps {
 const Chart = (props: chartProps) => {
   const dispatch = useAppDispatch();
   const { symbol, companyName, change, latestPrice } = props.infos;
-  const info = { symbol, companyName, change, latestPrice };
   const { favorites } = useAppSelector(selectInfos);
+  const info = { symbol, companyName, change, latestPrice };
   const perChange =
     ((latestPrice - (latestPrice - change)) / latestPrice) * 100;
 
@@ -77,37 +77,47 @@ const Chart = (props: chartProps) => {
     return null;
   };
 
+  const CustomStar = (fill, stroke, action, content) => {
+    return (
+      <TouchableOpacity onPress={() => dispatch(action(symbol))}>
+        <Star
+          width={23}
+          height={23}
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={1.5}
+          data-tip={content}
+        />
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
       <View style={styles.containerChart}>
         <View style={styles.headerChart}>
           <View style={styles.containerHeader}>
             <ReactTooltip backgroundColor="#0047BB" borderColor="#0047BB" />
-            {(favorites.length !== 0 ? favorites.includes(info) : true) ? (
-              <TouchableOpacity onPress={() => dispatch(addFavorites(symbol))}>
-                <Star
-                  width={23}
-                  height={23}
-                  fill={"#FFF"}
-                  stroke={"#0047BB"}
-                  strokeWidth={1.5}
-                  data-tip="Adicionar aos Favoritos"
-                />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={() => dispatch(removeFavorites(symbol))}
-              >
-                <Star
-                  width={23}
-                  height={23}
-                  fill={"#0047BB"}
-                  stroke={"#0047BB"}
-                  strokeWidth={1.5}
-                  data-tip="Remover d1os Favoritos"
-                />
-              </TouchableOpacity>
-            )}
+            {favorites.length !== 0
+              ? favorites.filter((value) => value.symbol.includes(info.symbol))
+                  .length !== 0
+                ? CustomStar(
+                    "#0047BB",
+                    "#0047BB",
+                    removeFavorites,
+                    "Remover dos Favoritos"
+                  )
+                : CustomStar(
+                    "#FFF",
+                    "#0047BB",
+                    addFavorites,
+                    "Adicionar dos Favoritos"
+                  )
+              : CustomStar(
+                  "#FFF",
+                  "#0047BB",
+                  addFavorites,
+                  "Adicionar dos Favoritos"
+                )}
             <View style={{ marginLeft: 12 }}>
               <Text style={styles.symbol}>{symbol}</Text>
               <Text style={styles.companyName}>{companyName}</Text>
@@ -134,11 +144,11 @@ const Chart = (props: chartProps) => {
             </View>
             {perChange > 0 ? (
               <Text style={[styles.change, styles.changePositive]}>
-                ${props.infos.change} (${perChange.toFixed(2)}%)
+                ${change} (${perChange.toFixed(2)}%)
               </Text>
             ) : (
               <Text style={[styles.change, styles.changeNegative]}>
-                ${props.infos.change} (${perChange.toFixed(2)}%)
+                ${change} (${perChange.toFixed(2)}%)
               </Text>
             )}
           </View>

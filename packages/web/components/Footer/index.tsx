@@ -32,6 +32,21 @@ const Footer = (props: footerProps) => {
   const ref = React.useRef(null);
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector(selectInfos);
+
+  const CustomStar = (fill, stroke, action, symbol) => {
+    return (
+      <TouchableOpacity onPress={() => dispatch(action(symbol))}>
+        <Star
+          width={23}
+          height={23}
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={1.5}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.containerFooter}>
       <View style={styles.containerFooterHeader}>
@@ -72,32 +87,28 @@ const Footer = (props: footerProps) => {
               return (
                 <View style={styles.containerBlockCard} key={key}>
                   <View style={styles.card}>
-                    {(
-                      favorites.length !== 0 ? !favorites.includes(value) : true
-                    ) ? (
-                      <TouchableOpacity
-                        onPress={() => dispatch(addFavorites(value.symbol))}
-                      >
-                        <Star
-                          width={23}
-                          height={23}
-                          stroke={"#0047BB"}
-                          strokeWidth={1.5}
-                        />
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() => dispatch(removeFavorites(value.symbol))}
-                      >
-                        <Star
-                          width={23}
-                          height={23}
-                          fill={"#0047BB"}
-                          stroke={"#0047BB"}
-                          strokeWidth={1.5}
-                        />
-                      </TouchableOpacity>
-                    )}
+                    {favorites.length !== 0
+                      ? favorites.filter((valueFav) =>
+                          valueFav.symbol.includes(value.symbol)
+                        ).length !== 0
+                        ? CustomStar(
+                            "#0047BB",
+                            "#0047BB",
+                            removeFavorites,
+                            value.symbol
+                          )
+                        : CustomStar(
+                            "#FFF",
+                            "#0047BB",
+                            addFavorites,
+                            value.symbol
+                          )
+                      : CustomStar(
+                          "#FFF",
+                          "#0047BB",
+                          addFavorites,
+                          value.symbol
+                        )}
                     <TouchableOpacity style={styles.containerInfo}>
                       <Image
                         style={styles.image}

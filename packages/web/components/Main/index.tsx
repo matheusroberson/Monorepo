@@ -55,12 +55,7 @@ const Main = (props: mainProps) => {
         />
         <Button
           borderRadiusLeft={0}
-          onPress={() =>
-            router.push({
-              pathname: "/dashboard",
-              query: { symbol: text.toLowerCase() },
-            })
-          }
+          onPress={() => dispatch(infosSymbol(text.toLowerCase()))}
         >
           <Search width={23} height={23} />
         </Button>
