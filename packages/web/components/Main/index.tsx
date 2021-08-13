@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useRouter } from "next/router";
-import { Input, Button } from "../../../shared/styles/styles";
+import { Input, Button } from "../../../shared/styles/global/styles";
 import Search from "../../../shared/components/Icons/Search";
 import MainDash from "../../../shared/components/Icons/Main";
 import Link from "../../../shared/components/Link";

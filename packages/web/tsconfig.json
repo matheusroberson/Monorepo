@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "../shared/styles/web/styles.ts"  ],
   "exclude": [
     "node_modules"
   ]

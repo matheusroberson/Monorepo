@@ -14,7 +14,8 @@ export const getInfosSymbol = async (symbol: string) => {
         symbol: symbol.toUpperCase(),
         companyName: res.companyName,
         change: res.change,
-        latestPrice: res.latestPrice }
+        latestPrice: res.latestPrice
+     }
 } 
 
 export const getHistoricalPrices = async (symbol:string) => {
@@ -33,6 +34,23 @@ export const getHistoricalPrices = async (symbol:string) => {
             minute: value.label.includes("PM") ? `0${parseInt(value.minute.slice(0,1)) + 12}:${value.minute.slice(2, 4)}` : value.minute,
             average: value.average,
         }
+    })
+    return arrayData
+}
+
+
+export const getMultiInfosSymbos = async (symbols:string[]) => {
+    const FormatedSymbols = symbols.join(",")
+    const response = await fetch(`https://sandbox.iexapis.com/stable/stock/market/batch?types=quote&symbols=${FormatedSymbols}&token=${TOKEN_API}&filter=symbol,companyName,change,latestPrice`,{
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+    const res = await response.json()
+    const arrayData = Object.keys(res).map((value) => {
+        return (res[value].quote)
     })
     return arrayData
 }
