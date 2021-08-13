@@ -55,7 +55,7 @@ const Favorites = () => {
                     <View style={styles.cardCompany}>
                       <Text style={styles.symbol}>{value.symbol}</Text>
                       <Text style={styles.companyName}>
-                        {value.companyName}
+                        {value.companyName.split(" ")[0]}
                       </Text>
                     </View>
                   </View>
