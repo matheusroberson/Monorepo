@@ -52,6 +52,11 @@ const Main = (props: mainProps) => {
           backgroundColor={"#FFFFFF"}
           bordeRadiusRight={0}
           width={30}
+          onKeyPress={(e) =>
+            e.nativeEvent.key === "Enter"
+              ? dispatch(infosSymbol(text.toLowerCase()))
+              : null
+          }
         />
         <Button
           borderRadiusLeft={0}

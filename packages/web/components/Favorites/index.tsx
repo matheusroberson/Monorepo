@@ -14,7 +14,11 @@ import Grow from "../../../shared/components/Icons/Grow";
 import { symbolToLogo } from "../../../shared/lib/data";
 
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { selectInfos, removeFavorites } from "../../store/infos/infosSlice";
+import {
+  selectInfos,
+  removeFavorites,
+  infosSymbol,
+} from "../../store/infos/infosSlice";
 
 const Favorites = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +40,12 @@ const Favorites = () => {
             const uri = symbolToLogo(value.symbol.toLowerCase());
             return (
               <View style={styles.containerBlockCard} key={key}>
-                <TouchableOpacity style={styles.card}>
+                <TouchableOpacity
+                  style={styles.card}
+                  onPress={() => {
+                    dispatch(infosSymbol(value.symbol.toLowerCase()));
+                  }}
+                >
                   <View style={styles.containerInfo}>
                     <Image
                       style={styles.image}

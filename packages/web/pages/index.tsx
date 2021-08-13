@@ -25,6 +25,14 @@ const App = () => {
             marginTop={0}
             bordeRadiusRight={0}
             width={100}
+            onKeyPress={(e) =>
+              e.nativeEvent.key === "Enter"
+                ? router.push({
+                    pathname: "/dashboard",
+                    query: { symbol: text.toLowerCase() },
+                  })
+                : null
+            }
           />
           <Button
             borderRadiusLeft={0}
