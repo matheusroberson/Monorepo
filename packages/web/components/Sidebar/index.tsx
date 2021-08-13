@@ -39,8 +39,8 @@ const App = (props: Props) => {
               <Main
                 width={32}
                 height={32}
-                fill={"#0047BB"}
-                stroke={"#0047BB"}
+                fill={"#A9ADB1"}
+                stroke={"#A9ADB1"}
               />
             </Text>
           </View>
