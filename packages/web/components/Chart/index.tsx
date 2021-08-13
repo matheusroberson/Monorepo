@@ -154,11 +154,11 @@ const Chart = (props: chartProps) => {
             </View>
             {perChange > 0 ? (
               <Text style={[styles.change, styles.changePositive]}>
-                ${change} (${perChange.toFixed(2)}%)
+                ${change} ({perChange.toFixed(2)}%)
               </Text>
             ) : (
               <Text style={[styles.change, styles.changeNegative]}>
-                ${change} (${perChange.toFixed(2)}%)
+                ${change} ({perChange.toFixed(2)}%)
               </Text>
             )}
           </View>
