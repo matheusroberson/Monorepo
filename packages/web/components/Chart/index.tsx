@@ -12,6 +12,7 @@ import {
   Tooltip as Tool,
 } from "recharts";
 import ReactTooltip from "react-tooltip";
+import { getHistoricalPrices } from "../../../shared/api/index";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
@@ -20,19 +21,19 @@ import {
   selectInfos,
 } from "../../store/infos/infosSlice";
 
-const data = [
-  { hour: "10:00", pv: 0 },
-  { hour: "10:30", pv: 600 },
-  { hour: "11:00", pv: 900 },
-  { hour: "12:00", pv: 750 },
-  { hour: "13:00", pv: 900 },
-  { hour: "14:00", pv: 150 },
-  { hour: "15:00", pv: 300 },
-  { hour: "16:00", pv: 200 },
-  { hour: "17:00", pv: 180 },
-  { hour: "17:30", pv: 200 },
-  { hour: "18:00", pv: 300 },
-];
+// const data = [
+//   { hour: "10:00", pv: 0 },
+//   { hour: "10:30", pv: 600 },
+//   { hour: "11:00", pv: 900 },
+//   { hour: "12:00", pv: 750 },
+//   { hour: "13:00", pv: 900 },
+//   { hour: "14:00", pv: 150 },
+//   { hour: "15:00", pv: 300 },
+//   { hour: "16:00", pv: 200 },
+//   { hour: "17:00", pv: 180 },
+//   { hour: "17:30", pv: 200 },
+//   { hour: "18:00", pv: 300 },
+// ];
 
 interface chartProps {
   infos: {
@@ -50,6 +51,15 @@ const Chart = (props: chartProps) => {
   const info = { symbol, companyName, change, latestPrice };
   const perChange =
     ((latestPrice - (latestPrice - change)) / latestPrice) * 100;
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    if (symbol) {
+      getHistoricalPrices(symbol).then((response) => {
+        setData(response);
+      });
+    }
+  }, [symbol]);
 
   const CustomActiveDot = ({ cx, cy }: { cx: number; cy: number }) => {
     return (
@@ -173,7 +183,7 @@ const Chart = (props: chartProps) => {
                 fontFamily: "Graphik",
                 fontSize: 12,
               }}
-              dataKey="hour"
+              dataKey="minute"
             />
             <YAxis
               tickLine={false}
@@ -188,7 +198,7 @@ const Chart = (props: chartProps) => {
             <Tool content={<CustomToolTip />} />
             <Area
               type="monotone"
-              dataKey="pv"
+              dataKey="average"
               stroke="#0047BB"
               fillOpacity={1}
               strokeWidth={2}
