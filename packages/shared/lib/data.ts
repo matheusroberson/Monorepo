@@ -23,10 +23,14 @@ export function symbolToLogo(syb:string) {
             "url": "https://i.imgur.com/XJljEAP.png"
         }
     ]
+    
 
-    const [{symbol, url}] = data.filter((value) => {
-        if (value.symbol === syb)  return value.url
+    const obj = data.filter((value) => {
+        if (value.symbol === syb) return value.url
     })
-
-    return url
+    
+    if (obj[0]) 
+        return obj[0].url
+    else 
+        return "https://i.imgur.com/XhXdfle.png"
 }
