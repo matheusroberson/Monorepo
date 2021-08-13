@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Input, Button } from "../../shared/styles/global/styles";
 import Logo from "../../shared/components/Icons/Logo";
 import Search from "../../shared/components/Icons/Search";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import Marquee from "../components/Marquee";
@@ -19,12 +19,23 @@ const App = () => {
     "MA",
     "V",
   ]);
+  const [status, setStatus] = React.useState(true);
 
   return (
     <View style={styles.containerHome}>
       <Sidebar styles={styles.sidebar} />
       <View style={styles.containerMain}>
-        <Marquee symbols={symbols} />
+        <View style={styles.containerMarquee}>
+          <TouchableOpacity
+            onPress={() => {
+              setStatus((prevState) => !prevState);
+            }}
+            style={styles.containerButton}
+          >
+            <Text style={styles.buttonPause}></Text>
+          </TouchableOpacity>
+          <Marquee status={status} symbols={symbols} />
+        </View>
         <Container>
           <Logo width={146} height={146} />
           <View style={styles.container}>
@@ -68,6 +79,22 @@ const styles = StyleSheet.create({
   containerHome: {
     flex: 1,
     flexDirection: "row",
+  },
+  containerMarquee: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  containerButton: {
+    borderWidth: 2,
+    borderColor: "#202020",
+    padding: 4,
+  },
+  buttonPause: {
+    width: 5,
+    height: 15,
+    borderLeftWidth: 17,
+    borderColor: "#202020",
+    borderStyle: "double",
   },
   container: {
     flexDirection: "row",

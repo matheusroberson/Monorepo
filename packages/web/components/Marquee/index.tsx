@@ -13,10 +13,10 @@ import { Arrow, Change, PerChange } from "../../../shared/styles/web/styles";
 
 interface marqueeProps {
   symbols: string[];
+  status: boolean;
 }
 
 const ViewMarquee = (props: marqueeProps) => {
-  const [play, toogle] = React.useReducer((p) => !p, true);
   const [symbols, setSymbols] = React.useState([]);
   const router = useRouter();
 
@@ -26,10 +26,6 @@ const ViewMarquee = (props: marqueeProps) => {
         setSymbols(response);
       });
     }
-  }, []);
-
-  React.useEffect(() => {
-    toogle;
   }, []);
 
   const renderTextMarquee = (value, key) => {
@@ -76,7 +72,7 @@ const ViewMarquee = (props: marqueeProps) => {
   };
 
   return (
-    <Marquee pauseOnHover play={play}>
+    <Marquee pauseOnHover play={props.status}>
       <FlatList
         contentContainerStyle={{ alignSelf: "flex-start", width: "100%" }}
         numColumns={symbols.length}
