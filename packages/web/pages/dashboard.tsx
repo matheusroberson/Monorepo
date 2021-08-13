@@ -8,12 +8,13 @@ import Main from "../components/Main";
 
 const App = () => {
   const router = useRouter();
-  const [symbol, setSymbol] = React.useState<string>(
-    router.query.symbol as string
-  );
+  const [symbol, setSymbol] = React.useState<string>();
 
   React.useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady) {
+      return;
+    }
+    setSymbol(router.query.symbol as string);
   }, [router.isReady]);
 
   return (

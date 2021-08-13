@@ -22,8 +22,10 @@ const Main = (props: mainProps) => {
   const [text, onChangeText] = React.useState("");
 
   React.useEffect(() => {
-    dispatch(infosSymbol(props.symbol));
-  }, []);
+    if (props.symbol) {
+      dispatch(infosSymbol(props.symbol));
+    }
+  }, [props.symbol]);
 
   return (
     <View style={styles.containerMain}>
