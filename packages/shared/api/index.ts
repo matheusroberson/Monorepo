@@ -21,7 +21,7 @@ export const getInfosSymbol = async (symbol: string) => {
 export const getHistoricalPrices = async (symbol:string) => {
     const dateNow = new Date()
     const date = `${dateNow.getFullYear()}0${dateNow.getMonth() + 1}${dateNow.getDate()}`
-    const response = await fetch(`https://sandbox.iexapis.com/stable/stock/${symbol}/chart/date/${date}?token=${TOKEN_API}&filter=minute,average,label`, {
+    const response = await fetch(`https://sandbox.iexapis.com/stable/stock/${symbol}/chart/date/${date}?token=${TOKEN_API}&filter=minute,average,label&chartSimplify=true`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -30,10 +30,10 @@ export const getHistoricalPrices = async (symbol:string) => {
     })
     const res = await response.json()
     const arrayData = res.map((value) => {
-        return {
-            minute: value.label.includes("PM") ? `${parseInt(value.minute.slice(0,1)) + 12}:${value.minute.slice(3, 5)}` : value.minute,
-            average: value.average,
-        }
+            return {
+                minute: value.label.includes("PM") ? `${parseInt(value.minute.slice(0,1)) + 12}:${value.minute.slice(3, 5)}` : value.minute,
+                average: value.average,
+            }
     })
     return arrayData
 }
