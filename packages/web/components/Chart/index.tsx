@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ActiveDot from "../../../shared/components/Icons/ActiveDot";
 import Star from "../../../shared/components/Icons/Star";
@@ -314,4 +314,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Chart;
+export default memo(Chart);

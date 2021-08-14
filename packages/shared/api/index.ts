@@ -29,11 +29,12 @@ export const getHistoricalPrices = async (symbol:string) => {
         },
     })
     const res = await response.json()
-    const arrayData = res.map((value) => {
-            return {
-                minute: value.label.includes("PM") ? `${parseInt(value.minute.slice(0,1)) + 12}:${value.minute.slice(3, 5)}` : value.minute,
-                average: value.average,
-            }
+    const arrayNoNull = res.filter(value => value.average !== null )
+    const arrayData = arrayNoNull.map((value) => {        
+        return {
+            minute: value.label.includes("PM") ? `${parseInt(value.minute.slice(0,1)) + 12}:${value.minute.slice(3, 5)}` : value.minute,
+            average: value.average,
+        }
     })
     return arrayData
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo, useRef, useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -31,10 +31,10 @@ interface footerProps {
 }
 
 const Footer = (props: footerProps) => {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector(selectInfos);
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
 
   const CustomStar = (fill, stroke, action, symbol) => {
     return (
@@ -294,4 +294,4 @@ const styles = StyleSheet.create({
     color: "#D64B45",
   },
 });
-export default Footer;
+export default memo(Footer);
